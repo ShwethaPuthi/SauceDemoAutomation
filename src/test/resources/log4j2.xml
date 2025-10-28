@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Simple Console Output -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%p] %m%n"/>
+        </Console>
+
+        <!-- Simple File Output -->
+        <File name="FileLogger" fileName="logs/test-log.log" append="true">
+            <PatternLayout pattern="[%p] %m%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>
