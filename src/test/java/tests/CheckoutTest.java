@@ -11,18 +11,21 @@ import utils.AppStrings;
 public class CheckoutTest extends BaseTest {
     @Test
     public void cartToCheckoutFlowTest() {
-        loginActions.loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword());
-        cartActions
-                .addItem(AppStrings.SECOND_PRODUCT)
-                .clickCartBadge()
-                .proceedToCheckout();
-
-        checkoutActions.withCartProducts(cartActions.getCartProducts())
-                .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
-                .verifySubtotalTaxTotal(cartActions.getCartProducts())
-                .finishCheckout();
+        baseActions
+                .getLoginActions()
+                    .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                .getCartActions()
+                    .addItem(AppStrings.SECOND_PRODUCT)
+                    .clickCartBadge()
+                    .proceedToCheckout()
+                .getCheckoutActions()
+                    .withCartProducts(getBaseActions().getCartActions().getCartProducts())
+                    .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
+                    .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
+                    .finishCheckout();
 
         log.info("Completed Checkout flow for user: {}", Users.STANDARD_USER.getUsername() );
+
     }
 }
 

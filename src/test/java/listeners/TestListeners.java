@@ -18,7 +18,13 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
+
         log.info("Test passed: " + result.getName());
+        /*Object testClass = result.getInstance();
+        if (testClass instanceof BaseTest) {
+            String path = ReportUtils.takeScreenshot(((BaseTest) testClass).driver, result.getName());
+            log.error("Screenshot is saved at: " + path);
+        }*/
     }
 
     @Override

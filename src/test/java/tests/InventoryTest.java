@@ -11,10 +11,12 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void inventoryFlowTest() {
-        loginActions.loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword());
-        inventoryActions
-                .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
-                .verifyAscendingOrder();
+        baseActions
+                .getLoginActions()
+                    .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                .getInventoryActions()
+                    .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
+                    .verifyAscendingOrder();
 
         log.info("Inventory sorting test completed successfully for user: {}", Users.STANDARD_USER.getUsername());
 

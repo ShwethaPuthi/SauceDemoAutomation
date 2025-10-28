@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class SiteFactory {
     private WebDriver driver;
@@ -12,6 +13,7 @@ public class SiteFactory {
 
     public SiteFactory(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
 
         // Initialize all pages here
         loginPage = new LoginPage(driver);
@@ -25,5 +27,9 @@ public class SiteFactory {
     public InventoryPage getInventoryPage() { return inventoryPage; }
     public CartPage getCartPage() { return cartPage; }
     public CheckoutPage getCheckoutPage() { return checkoutPage; }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
 

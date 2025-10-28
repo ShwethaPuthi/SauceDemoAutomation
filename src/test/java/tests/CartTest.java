@@ -16,22 +16,42 @@ public class CartTest extends BaseTest {
 
     @Test
     public void CartFlowTest() {
-        loginActions.loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword());
-
-        cartActions
+        /*baseActions
+                .getLoginActions()
+                .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                .getCartActions()
                 .addItem(AppStrings.FIRST_PRODUCT)
                 .addItem(AppStrings.SECOND_PRODUCT)
                 .verifyCartBadgeCount(2)
                 .removeItem(AppStrings.FIRST_PRODUCT)
                 .verifyCartBadgeCount(1)
                 .clickCartBadge()
-                .proceedToCheckout();
-
-        checkoutActions
-                .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
-                .verifySubtotalTaxTotal(cartActions.getCartProducts())
+                .proceedToCheckout()
+                .getCheckoutActions()
+                .fillUserDetails(UserDetails.DETAILS.getFirstname(),
+                        UserDetails.DETAILS.getLastname(),
+                        UserDetails.DETAILS.getPinCode())
+                .verifySubtotalTaxTotal(baseActions.getCartActions().getCartProducts())
                 .finishCheckout();
+        log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());*/
 
+        getBaseActions()
+                .getLoginActions()
+                .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                .getCartActions()
+                    .addItem(AppStrings.FIRST_PRODUCT)
+                    .addItem(AppStrings.SECOND_PRODUCT)
+                    .verifyCartBadgeCount(2)
+                    .removeItem(AppStrings.FIRST_PRODUCT)
+                    .verifyCartBadgeCount(1)
+                    .clickCartBadge()
+                    .proceedToCheckout()
+                .getCheckoutActions()
+                    .fillUserDetails(UserDetails.DETAILS.getFirstname(),
+                                     UserDetails.DETAILS.getLastname(),
+                                     UserDetails.DETAILS.getPinCode())
+                    .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
+                    .finishCheckout();
         log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());
 
     }

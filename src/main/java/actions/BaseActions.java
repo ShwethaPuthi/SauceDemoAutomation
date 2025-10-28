@@ -1,5 +1,6 @@
 package actions;
 
+import org.openqa.selenium.WebDriver;
 import pages.SiteFactory;
 
 public class BaseActions {
@@ -11,26 +12,27 @@ public class BaseActions {
 
     public BaseActions(SiteFactory siteFactory) {
         this.siteFactory = siteFactory;
-        this.loginActions = new LoginActions(siteFactory);
-        this.inventoryActions = new InventoryActions(siteFactory);
-        this.cartActions = new CartActions(siteFactory);
-        this.checkoutActions = new CheckoutActions(siteFactory);
+       // this.loginActions = new LoginActions(siteFactory);
+       // this.inventoryActions = new InventoryActions(siteFactory);
+       // this.cartActions = new CartActions(siteFactory);
+        //this.checkoutActions = new CheckoutActions(siteFactory);
     }
-
-    // ✅ Getter methods
+    protected WebDriver getDriver() {
+        return siteFactory.getDriver();
+    }
     public LoginActions getLoginActions() {
-        return loginActions;
+        return new LoginActions(siteFactory);
     }
 
     public InventoryActions getInventoryActions() {
-        return inventoryActions;
+        return new InventoryActions(siteFactory);
     }
 
     public CartActions getCartActions() {
-        return cartActions;
+        return new CartActions(siteFactory);
     }
 
     public CheckoutActions getCheckoutActions() {
-        return checkoutActions;
+        return new CheckoutActions(siteFactory);
     }
 }

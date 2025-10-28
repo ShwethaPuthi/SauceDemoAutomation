@@ -4,12 +4,13 @@ import pages.SiteFactory;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class CartActions extends BaseActions {
+public class CartActions extends BaseActions{
 
     private Logger log = LoggerUtils.getLogger(CartActions.class);
-    private Map<String, Double> cartProducts;
+    private Map<String, Double> cartProducts=new HashMap<>();
 
     public CartActions(SiteFactory siteFactory) {
         super(siteFactory);
@@ -46,6 +47,9 @@ public class CartActions extends BaseActions {
     }
 
     public Map<String, Double> getCartProducts() {
+        if (cartProducts == null || cartProducts.isEmpty()) {
+            cartProducts = siteFactory.getCartPage().getCartProductsWithPrices();
+        }
         return cartProducts;
     }
 }
