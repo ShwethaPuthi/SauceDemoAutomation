@@ -1,0 +1,21 @@
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Maven
+target/
+*.class
+
+# Logs
+*.log
+
+# Drivers
+chromedriver*
+geckodriver*
+msedgedriver*
+
+# Misc
+*.iml
