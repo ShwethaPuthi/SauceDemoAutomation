@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 public class SiteFactory {
     private WebDriver driver;
@@ -13,7 +12,12 @@ public class SiteFactory {
 
     public SiteFactory(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+
+        //PageFactory.initElements(driver, this);
+        //Why not? Selenium tries to initialize every field annotated with @FindBy inside your SiteFactory object.
+        //But SiteFactory has page objects (like LoginPage, CartPage) that themselves call PageFactory.initElements(driver, this)
+        // inside their constructors (via super(driver)). So Selenium tries to initialize fields in SiteFactory, which initializes
+        // pages, which call back into PageFactory, which sees SiteFactory again-infinite recursion loop
 
         // Initialize all pages here
         loginPage = new LoginPage(driver);

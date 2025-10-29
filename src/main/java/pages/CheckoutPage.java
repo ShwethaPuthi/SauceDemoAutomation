@@ -8,9 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 import utils.LoggerUtils;
 import org.testng.Assert;
 
-public class CheckoutPage {
+public class CheckoutPage extends BasePage {
 
-    private WebDriver driver;
+    public CheckoutPage(WebDriver driver) {
+        super(driver);
+    }
     private Logger log = LoggerUtils.getLogger(CheckoutPage.class);
 
     @FindBy(id = "first-name")
@@ -36,11 +38,6 @@ public class CheckoutPage {
 
     @FindBy(css = ".cart_button") // Finish button on last page
     private WebElement finishButton;
-
-    public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     // Fill details
     public void enterFirstName(String firstName) {

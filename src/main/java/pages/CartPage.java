@@ -13,9 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CartPage {
+public class CartPage extends BasePage{
 
-    private WebDriver driver;
+     public CartPage(WebDriver driver) {
+        super(driver);
+    }
     private Logger log = LoggerUtils.getLogger(CartPage.class);
 
     @FindBy(className = "cart_item")
@@ -35,11 +37,6 @@ public class CartPage {
 
     @FindBy(css = ".checkout_button")
     private WebElement checkoutButton;
-
-    public CartPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     // Add/Remove products
     public void addProductToCart(String productName) {

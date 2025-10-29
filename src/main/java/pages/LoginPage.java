@@ -8,9 +8,13 @@ import org.openqa.selenium.support.PageFactory;
 import utils.AppStrings;
 import utils.LoggerUtils;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
 
-    private WebDriver driver;
+    public LoginPage(WebDriver driver) {
+        //this.driver=driver;
+        //PageFactory.initElements(driver, this);
+        super(driver);
+    }
     private Logger log = LoggerUtils.getLogger(LoginPage.class);
 
     @FindBy(id = "user-name")
@@ -27,11 +31,6 @@ public class LoginPage {
 
     public  String getErrorMessage(){
         return errorMessage.getText().trim();
-    }
-
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     public LoginPage login(String username, String password) {

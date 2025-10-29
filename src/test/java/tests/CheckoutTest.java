@@ -11,7 +11,7 @@ import utils.AppStrings;
 public class CheckoutTest extends BaseTest {
     @Test
     public void cartToCheckoutFlowTest() {
-        baseActions
+        getBaseActions()
                 .getLoginActions()
                     .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
                 .getCartActions()
@@ -19,7 +19,7 @@ public class CheckoutTest extends BaseTest {
                     .clickCartBadge()
                     .proceedToCheckout()
                 .getCheckoutActions()
-                    .withCartProducts(getBaseActions().getCartActions().getCartProducts())
+                    //.withCartProducts(getBaseActions().getCartActions().getCartProducts())
                     .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
                     .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
                     .finishCheckout();

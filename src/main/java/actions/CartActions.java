@@ -3,7 +3,6 @@ package actions;
 import pages.SiteFactory;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 

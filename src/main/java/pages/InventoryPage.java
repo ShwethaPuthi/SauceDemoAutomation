@@ -7,20 +7,16 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryPage {
-
-    private WebDriver driver;
+public class InventoryPage extends BasePage{
+    public InventoryPage(WebDriver driver) {
+        super(driver);
+    }
 
     @FindBy(css = ".inventory_item_price")
     private List<WebElement> prices;
 
     @FindBy(css = ".product_sort_container")
     private WebElement sortDropdown;
-
-    public InventoryPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
     public InventoryPage selectSort(String sortOption) {
         sortDropdown.sendKeys(sortOption);
