@@ -16,28 +16,9 @@ public class CartTest extends BaseTest {
 
     @Test
     public void CartFlowTest() {
-        /*baseActions
-                .getLoginActions()
-                .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
-                .getCartActions()
-                .addItem(AppStrings.FIRST_PRODUCT)
-                .addItem(AppStrings.SECOND_PRODUCT)
-                .verifyCartBadgeCount(2)
-                .removeItem(AppStrings.FIRST_PRODUCT)
-                .verifyCartBadgeCount(1)
-                .clickCartBadge()
-                .proceedToCheckout()
-                .getCheckoutActions()
-                .fillUserDetails(UserDetails.DETAILS.getFirstname(),
-                        UserDetails.DETAILS.getLastname(),
-                        UserDetails.DETAILS.getPinCode())
-                .verifySubtotalTaxTotal(baseActions.getCartActions().getCartProducts())
-                .finishCheckout();
-        log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());*/
-
         getBaseActions()
                 .getLoginActions()
-                .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                    .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
                 .getCartActions()
                     .addItem(AppStrings.FIRST_PRODUCT)
                     .addItem(AppStrings.SECOND_PRODUCT)

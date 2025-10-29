@@ -11,7 +11,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void inventoryFlowTest() {
-        baseActions
+        getBaseActions()
                 .getLoginActions()
                     .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
                 .getInventoryActions()
