@@ -22,14 +22,14 @@ public class LoginActions extends BaseActions {
     public InventoryActions verifySuccessfulLogin() {
         siteFactory.getLoginPage().verifyLoginSuccess();
         log.info("Login successful -> Navigating to Inventory Page");
-        Assert.assertEquals(getDriver().getCurrentUrl(), AppStrings.INVENTORY_PAGE_URL, "Login failed!");
+        Assert.assertEquals(getDriver().getCurrentUrl(), AppStrings.INVENTORY_PAGE_URL, AppStrings.ErrorMsg);
         return new InventoryActions(siteFactory); // Calling another action
     }
 
     public LoginActions verifyLoginFailure(String expectedMessage) {
         siteFactory.getLoginPage().verifyLoginFailed(expectedMessage);
         String actualMessage = siteFactory.getLoginPage().getErrorMessage();
-        Assert.assertEquals(actualMessage, expectedMessage, "Login error message mismatch!");
+        Assert.assertEquals(actualMessage, expectedMessage,AppStrings.LoginMismatchMsg );
         log.info("Verified login failed as expected");
         return this;
     }

@@ -2,6 +2,7 @@ package actions;
 
 import org.testng.Assert;
 import pages.SiteFactory;
+import utils.AppStrings;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 import java.util.Map;
@@ -40,8 +41,8 @@ public class CheckoutActions extends BaseActions {
         double expectedTotal = expectedSubtotal + displayedTax; // total = subtotal + tax
         log.info("Expected Subtotal: {}, Displayed Subtotal: {}", expectedSubtotal, displayedSubtotal);
         log.info("Expected Total: {}, Displayed Total: {}, Displayed Tax: {}", expectedTotal, displayedTotal, displayedTax);
-        Assert.assertEquals(displayedSubtotal, expectedSubtotal, 0.01, "Subtotal mismatch!");
-        Assert.assertEquals(displayedTotal, expectedTotal, 0.01, "Total mismatch!");
+        Assert.assertEquals(displayedSubtotal, expectedSubtotal, 0.01, AppStrings.CheckoutSubTotalMsg);
+        Assert.assertEquals(displayedTotal, expectedTotal, 0.01, AppStrings.TotalMismatch);
         log.info("Verified subtotal, tax, and total successfully!");
         return this;
     }

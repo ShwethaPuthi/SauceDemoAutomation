@@ -55,7 +55,7 @@ public class CartPage extends BasePage{
                 ? Integer.parseInt(cartBadge.getText().trim())
                 : 0;
         log.info("Expected Cart Count: {}, Actual Cart Count: {}", expectedCount, actualCount);
-        Assert.assertEquals(actualCount, expectedCount, "Cart icon count mismatch!");
+        Assert.assertEquals(actualCount, expectedCount, AppStrings.CartCountError);
     }
 
     public Map<String, Double> getCartProductsWithPrices() {
