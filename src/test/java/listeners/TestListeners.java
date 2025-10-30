@@ -34,12 +34,10 @@ public class TestListeners implements ITestListener {
     public void onTestFailure(ITestResult result) {
         log.error("Test failed: {}", result.getName());
         ExtentTestManager.getTest().log(Status.FAIL, "Test failed: " + result.getThrowable());
-
         Object testClass = result.getInstance();
         if (testClass instanceof BaseTest) {
             BaseTest baseTest = (BaseTest) testClass;
             WebDriver driver = baseTest.getDriver(); // ✅ Get actual driver for the current thread
-
             if (driver != null) {
                 String path = ReportUtils.takeScreenshot(driver, result.getName());
                 ExtentTestManager.getTest().addScreenCaptureFromPath(path);
@@ -58,7 +56,9 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-        log.info("All tests finished. Flushing Extent Report...");
-        ExtentManager.getInstance().flush(); // <-- the crucial part
+        ExtentManager.getInstance().flush();
+        String reportPath = ExtentManager.getReportPath();
+        System.out.println("✅ Extent Report generated at: " + reportPath);
+        log.info("Extent Report generated at: {}", reportPath);
     }
 }
