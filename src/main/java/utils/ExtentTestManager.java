@@ -2,7 +2,6 @@ package utils;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.ExtentReports;
-
 import java.util.HashMap;
 import java.util.Map;
 

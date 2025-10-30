@@ -1,6 +1,7 @@
 package listeners;
 
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -37,8 +38,10 @@ public class TestListeners implements ITestListener {
         Object testClass = result.getInstance();
         if (testClass instanceof BaseTest) {
             BaseTest baseTest = (BaseTest) testClass;
-            if (baseTest.driver != null) {
-                String path = ReportUtils.takeScreenshot(baseTest.driver, result.getName());
+            WebDriver driver = baseTest.getDriver(); // ✅ Get actual driver for the current thread
+
+            if (driver != null) {
+                String path = ReportUtils.takeScreenshot(driver, result.getName());
                 ExtentTestManager.getTest().addScreenCaptureFromPath(path);
                 log.info("Screenshot attached to report: {}", path);
             } else {
