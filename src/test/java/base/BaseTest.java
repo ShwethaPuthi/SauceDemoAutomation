@@ -22,7 +22,7 @@ public class BaseTest {
     protected BaseActions baseActions;
 
     @Parameters({"browser", "url"})
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setup(@Optional("chrome") String browser,
                       @Optional(AppStrings.BASE_URL) String url) {
         driver= BrowserType.fromString(browser).createDriver();
@@ -37,7 +37,7 @@ public class BaseTest {
         log.info("Browser setup complete. Base Actions and SiteFactory initialized.");
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         if (driver != null) {
             driver.quit();

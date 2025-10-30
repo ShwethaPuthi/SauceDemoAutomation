@@ -5,12 +5,14 @@ import enums.Users;
 import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ExtentTestManager;
 
 @Listeners(TestListeners.class)
 public class InventoryTest extends BaseTest {
-
-    @Test
+    @Test(groups = {"Functional", "Smoke"}, description = "Verify inventory sorting by price (low to high)")
     public void inventoryFlowTest() {
+        ExtentTestManager.getTest().assignCategory("Functional", "Smoke");
+
         getBaseActions()
                 .getLoginActions()
                     .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())

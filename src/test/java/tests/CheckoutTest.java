@@ -6,11 +6,13 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import base.BaseTest;
 import utils.AppStrings;
+import utils.ExtentTestManager;
 
 @Listeners(TestListeners.class)
 public class CheckoutTest extends BaseTest {
-    @Test
+    @Test(groups = {"Functional", "Smoke"}, description = "Verify complete checkout flow for a valid user")
     public void cartToCheckoutFlowTest() {
+        ExtentTestManager.getTest().assignCategory("Functional", "Smoke");
         getBaseActions()
                 .getLoginActions()
                     .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())

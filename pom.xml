@@ -59,6 +59,12 @@
 						<include>**/*Test.java</include>
 					</includes>
 					<systemPropertyVariables>
+                        <properties>
+                            <property>
+                                <name>groups</name>
+                                <value>${groups}</value>
+                            </property>
+                        </properties>
 						<browser>edge</browser>
 						<url>https://www.saucedemo.com/</url>
 					</systemPropertyVariables>

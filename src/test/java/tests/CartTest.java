@@ -6,6 +6,7 @@ import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AppStrings;
+import utils.ExtentTestManager;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 
@@ -14,8 +15,9 @@ public class CartTest extends BaseTest {
 
     private static final Logger log = LoggerUtils.getLogger(CartTest.class);
 
-    @Test
+    @Test(groups = {"Functional","Sanity"}, description = "Verify adding and removing items from the cart, and checkout intiation")
     public void CartFlowTest() {
+        ExtentTestManager.getTest().assignCategory("Functional","Sanity");
         getBaseActions()
                 .getLoginActions()
                     .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())

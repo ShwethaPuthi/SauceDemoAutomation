@@ -12,57 +12,50 @@ import org.apache.logging.log4j.Logger;
 import utils.ReportUtils;
 
 public class TestListeners implements ITestListener {
-    private Logger log = LoggerUtils.getLogger(TestListeners.class);
+    private static final Logger log = LoggerUtils.getLogger(TestListeners.class);
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTestManager.startTest(result.getMethod().getMethodName(),
-                result.getMethod().getDescription());
-        log.info("Starting test: " + result.getName());
+        ExtentTestManager.startTest(
+                result.getMethod().getMethodName(),
+                result.getMethod().getDescription()
+        );
+        log.info("Starting test: {}", result.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        ExtentTestManager.getTest().log(Status.PASS, "Test passed successfully ");
-        log.info("Test passed: " + result.getName());
-        /*Object testClass = result.getInstance();
-        if (testClass instanceof BaseTest) {
-            String path = ReportUtils.takeScreenshot(((BaseTest) testClass).driver, result.getName());
-            log.error("Screenshot is saved at: " + path);
-        }*/
+        ExtentTestManager.getTest().log(Status.PASS, "Test passed successfully");
+        log.info("Test passed: {}", result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        /*log.error("Test failed: " + result.getName());
-        Object testClass = result.getInstance();
-        if (testClass instanceof BaseTest) {
-            String path = ReportUtils.takeScreenshot(((BaseTest) testClass).driver, result.getName());
-            log.error("Screenshot saved at: " + path);
-        }*/
         log.error("Test failed: {}", result.getName());
         ExtentTestManager.getTest().log(Status.FAIL, "Test failed: " + result.getThrowable());
 
-        // Capture screenshot & add to report
         Object testClass = result.getInstance();
         if (testClass instanceof BaseTest) {
-            String path = ReportUtils.takeScreenshot(((BaseTest) testClass).driver, result.getName());
-            ExtentTestManager.getTest().addScreenCaptureFromPath(path);
+            BaseTest baseTest = (BaseTest) testClass;
+            if (baseTest.driver != null) {
+                String path = ReportUtils.takeScreenshot(baseTest.driver, result.getName());
+                ExtentTestManager.getTest().addScreenCaptureFromPath(path);
+                log.info("Screenshot attached to report: {}", path);
+            } else {
+                log.warn("Driver was null — could not take screenshot for {}", result.getName());
+            }
         }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         ExtentTestManager.getTest().log(Status.SKIP, "Test skipped: " + result.getName());
-        log.warn("Test skipped: {}", result.getName());
+        log.warn(" Test skipped: {}", result.getName());
     }
 
-    /*@Override
-    public void onStart(ITestContext context) {
-        log.info("All tests finished. Flushing Extent Report...");
-        ExtentManager.getInstance().flush();
-    }*/
     @Override
     public void onFinish(ITestContext context) {
-        ExtentTestManager.endTest();}
+        log.info("All tests finished. Flushing Extent Report...");
+        ExtentManager.getInstance().flush(); // <-- the crucial part
+    }
 }
