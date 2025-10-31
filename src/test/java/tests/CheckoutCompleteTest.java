@@ -23,9 +23,7 @@ public class CheckoutCompleteTest extends BaseTest {
                 .clickCartBadge()
                 .proceedToCheckout()
                 .getCheckoutActions()
-                .fillUserDetails(UserDetails.DETAILS.getFirstname(),
-                UserDetails.DETAILS.getLastname(),
-                UserDetails.DETAILS.getPinCode()).finishCheckout()
+                .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode()).finishCheckout()
                 .getCheckoutCompleteActions()
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();

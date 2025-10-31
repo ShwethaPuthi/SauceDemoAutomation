@@ -15,10 +15,10 @@ public class InventoryTest extends BaseTest {
 
         getBaseActions()
                 .getLoginActions()
-                    .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
+                .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
                 .getInventoryActions()
-                    .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
-                    .verifyAscendingOrder();
+                .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
+                .verifyAscendingOrder();
 
         log.info("Inventory sorting test completed successfully for user: {}", Users.STANDARD_USER.getUsername());
 
