@@ -15,6 +15,8 @@ import java.time.Duration;
 
 public class BaseTest {
 
+    //ThreadLocal gives each test thread its own private copy of the WebDriver.
+    //So, even if 5 tests run at once, each gets a separate, isolated browser.
     // Thread-safe WebDriver for parallel execution
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 

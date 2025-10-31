@@ -3,14 +3,17 @@ package tests;
 import base.BaseTest;
 import enums.UserDetails;
 import enums.Users;
+import listeners.TestListeners;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AppStrings;
 import utils.ExtentTestManager;
 
+@Listeners(TestListeners.class)
 public class CheckoutCompleteTest extends BaseTest {
-    @Test//(groups = {"Functional"})
+    @Test(groups = {"Functional"}, description = "FAILED TEST CASE")
     public void CompleteCheckoutFlowTest(){
-        //ExtentTestManager.getTest().assignCategory("Functional");
+        ExtentTestManager.getTest().assignCategory("Functional");
 
         getBaseActions()
                 .getLoginActions()

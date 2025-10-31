@@ -7,9 +7,12 @@ import java.util.Map;
 
 public class ExtentTestManager {
     static Map<Integer, ExtentTest> extentTestMap = new HashMap<>();
+    //Creates a static map where:
+    //Key = Thread ID (unique number for each test thread)
+    //Value = ExtentTest object for that thread’s test.
     static ExtentReports extent = ExtentManager.getInstance();
 
-    public static synchronized ExtentTest getTest() {
+    public static synchronized ExtentTest getTest() { //Returns the current thread’s test.
         return extentTestMap.get((int) (long) Thread.currentThread().getId());
     }
 
@@ -21,5 +24,5 @@ public class ExtentTestManager {
 
     public static synchronized void endTest() {
         extent.flush();
-    }
+    } //It writes all collected logs, system info, and test results into the HTML file.
 }
