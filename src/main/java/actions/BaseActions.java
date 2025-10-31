@@ -26,4 +26,8 @@ public class BaseActions {
     public CheckoutActions getCheckoutActions() {
         return new CheckoutActions(siteFactory);
     }
+
+    public CheckoutCompleteActions getCheckoutCompleteActions(){
+        return new CheckoutCompleteActions(siteFactory);
+    }
 }

@@ -1,4 +1,5 @@
 package tests;
+
 import base.BaseTest;
 import enums.UserDetails;
 import enums.Users;

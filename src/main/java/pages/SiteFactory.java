@@ -9,6 +9,7 @@ public class SiteFactory {
     private InventoryPage inventoryPage;
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
+    private CheckoutCompletePage checkoutCompletePage;
 
     public SiteFactory(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +25,7 @@ public class SiteFactory {
         inventoryPage = new InventoryPage(driver);
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
+        checkoutCompletePage=new CheckoutCompletePage(driver);
     }
 
     // Getters for pages
@@ -31,6 +33,7 @@ public class SiteFactory {
     public InventoryPage getInventoryPage() { return inventoryPage; }
     public CartPage getCartPage() { return cartPage; }
     public CheckoutPage getCheckoutPage() { return checkoutPage; }
+    public CheckoutCompletePage getCheckoutCompletePage(){return checkoutCompletePage;}
 
     public WebDriver getDriver() {
         return driver;

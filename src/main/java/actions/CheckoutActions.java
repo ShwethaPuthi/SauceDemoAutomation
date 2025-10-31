@@ -47,9 +47,11 @@ public class CheckoutActions extends BaseActions {
         return this;
     }
 
-    public void finishCheckout() {
+    public CheckoutActions finishCheckout() {
         siteFactory.getCheckoutPage().clickFinishButton();
         log.info("Finished checkout");
+        return this;
+
     }
 }
 
