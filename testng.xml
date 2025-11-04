@@ -11,8 +11,9 @@
         </groups>
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.InventoryTest"/>
+            <class name="tests.CheckoutTest"/>
             <class name="tests.CheckoutCompleteTest"/>
+            <class name="tests.CartTest"/>
         </classes>
     </test>
 
@@ -25,7 +26,9 @@
             </run>
         </groups>
         <classes>
+            <class name="tests.LoginTest"/>
             <class name="tests.CartTest"/>
+            <class name="tests.InventoryTest"/>
         </classes>
     </test>
 

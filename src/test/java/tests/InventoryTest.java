@@ -5,13 +5,13 @@ import enums.Users;
 import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import utils.ExtentTestManager;
+import utils.ReportManager;
 
 @Listeners(TestListeners.class)
 public class InventoryTest extends BaseTest {
-    @Test(groups = {"Functional", "Smoke"}, description = "Verify inventory sorting by price (low to high)")
+    @Test(groups = {"Smoke"}, description = "Verify inventory sorting by price (low to high)")
     public void inventoryFlowTest() {
-        ExtentTestManager.getTest().assignCategory("Functional", "Smoke");
+        ReportManager.getTest().assignCategory("Smoke");
 
         getBaseActions()
                 .getLoginActions()
@@ -19,7 +19,6 @@ public class InventoryTest extends BaseTest {
                 .getInventoryActions()
                 .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
                 .verifyAscendingOrder();
-
         log.info("Inventory sorting test completed successfully for user: {}", Users.STANDARD_USER.getUsername());
 
     }

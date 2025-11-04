@@ -19,7 +19,7 @@ public class CheckoutCompletePage extends BasePage{
     @FindBy(id = "react-burger-menu-btn")
     private WebElement burgerMenuBtn;
 
-    @FindBy(id = "logout_sidebar_links")
+    @FindBy(id = "logout_sidebar_link")
     private WebElement logoutLink;
 
     public WebElement getBackHomeBtn() {

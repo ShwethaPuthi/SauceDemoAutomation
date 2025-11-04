@@ -7,14 +7,13 @@ import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AppStrings;
-import utils.ExtentTestManager;
+import utils.ReportManager;
 
 @Listeners(TestListeners.class)
 public class CheckoutCompleteTest extends BaseTest {
     @Test(groups = {"Functional"}, description = "FAILED TEST CASE")
     public void CompleteCheckoutFlowTest(){
-        ExtentTestManager.getTest().assignCategory("Functional");
-
+        ReportManager.getTest().assignCategory("Functional");
         getBaseActions()
                 .getLoginActions()
                 .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
