@@ -23,22 +23,17 @@ public class InventoryPage extends BasePage{
         return this;
     }
 
-    public void verifyAscendingOrder() {
+    public List<Double> getItemPrices() {
         List<Double> priceList = new ArrayList<>();
         for (WebElement price : prices) {
             priceList.add(Double.parseDouble(price.getText().replace("$", "")));
         }
-
-        if (!isSortedAscending(priceList)) {
-            throw new AssertionError("Prices are NOT sorted in ascending order!");
-        }
+        return priceList;
     }
 
-    private boolean isSortedAscending(List<Double> list) {
+    public boolean isSortedAscending(List<Double> list) {
         for (int i = 0; i < list.size() - 1; i++) {
-            if (list.get(i) > list.get(i + 1)) {
-                return false;
-            }
+            if (list.get(i) > list.get(i + 1)) return false;
         }
         return true;
     }

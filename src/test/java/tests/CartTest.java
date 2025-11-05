@@ -16,7 +16,7 @@ public class CartTest extends BaseTest {
 
     private static final Logger log = LoggerUtils.getLogger(CartTest.class);
 
-    @Test(groups = {"Functional"}, description = "Verify adding and removing items from the cart, and checkout intiation-Complete Flow")
+    @Test(groups = {"Functional"}, description = "Verify adding and removing items from the cart, and checkout initiation")
     public void CartFlowTest() {
         ReportManager.getTest().assignCategory("Functional");
         getBaseActions()
@@ -33,10 +33,10 @@ public class CartTest extends BaseTest {
                 .getCheckoutActions()
                 .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
                 .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
-                .finishCheckout()
-                .getCheckoutCompleteActions()
-                .clickBackHome()
-                .clickBurgerMenuAndLogout();
+                .finishCheckout();
+                //.getCheckoutCompleteActions()
+                //.clickBackHome()
+                //.clickBurgerMenuAndLogout();
         log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());
 
     }

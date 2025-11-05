@@ -18,6 +18,7 @@ public class TestListeners implements ITestListener {
         ReportManager.startTest(result.getMethod().getMethodName(),
                 result.getMethod().getDescription());
         log.info("Starting test: {}", result.getName());
+       // ReportManager.endTest();
     }
 
     @Override

@@ -51,17 +51,13 @@ public class BaseTest {
         }
     }
 
-    // ✅ Thread-safe getter
+    // Thread-safe getter
     public WebDriver getDriver() {
         return driver.get();
     }
 
     public BaseActions getBaseActions() {
         return baseActions;
-    }
-
-    public SiteFactory getSiteFactory() {
-        return siteFactory;
     }
 }
 

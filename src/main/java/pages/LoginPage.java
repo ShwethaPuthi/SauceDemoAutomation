@@ -26,27 +26,35 @@ public class LoginPage extends BasePage{
     @FindBy(css = "h3[data-test='error']")
     private WebElement errorMessage;
 
-    public  String getErrorMessage(){
+    public void enterUsername(String username) {
+        log.info("Entering username: {}", username);
+        usernameInput.clear();
+        usernameInput.sendKeys(username);
+    }
+
+    public void enterPassword(String password) {
+        log.info("Entering password: {}", password);
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
+    }
+
+    public void clickLoginButton() {
+        log.info("Clicking login button");
+        loginButton.click();
+    }
+
+    public void performLogin(String username, String password) {
+        enterUsername(username);
+        enterPassword(password);
+        clickLoginButton();
+        log.info("Performed login with given credentials.");
+    }
+    // Utility getters (used by Action class for validation)
+    public String getErrorMessage() {
         return errorMessage.getText().trim();
     }
 
-    public LoginPage login(String username, String password) {
-        usernameInput.clear();
-        log.info("Entering username: {}", username);
-        usernameInput.sendKeys(username);
-        passwordInput.clear();
-        log.info("Entering password: {}", password);
-        passwordInput.sendKeys(password);
-        loginButton.click();
-        log.info("Clicking login button");
-        return this;
-    }
-
-    public void verifyLoginSuccess() {
-        log.info("Verifying login success. Current URL: {}, Expected URL: {}", driver.getCurrentUrl(), AppStrings.INVENTORY_PAGE_URL);
-    }
-
-    public void verifyLoginFailed(String expectedMessage) {
-        log.info("Verifying login failure. Actual message: '{}', Expected message: '{}'", errorMessage.getText().trim(), expectedMessage);
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

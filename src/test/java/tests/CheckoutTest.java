@@ -10,7 +10,7 @@ import utils.ReportManager;
 
 @Listeners(TestListeners.class)
 public class CheckoutTest extends BaseTest {
-    @Test(groups = {"Functional"}, description = "Verify checkout flow for a valid user")
+    @Test(groups = {"Functional"}, description = "Verify complete flow for a valid user")
     public void cartToCheckoutFlowTest() {
         ReportManager.getTest().assignCategory("Functional");
         getBaseActions()
@@ -23,7 +23,10 @@ public class CheckoutTest extends BaseTest {
                 .getCheckoutActions()
                 .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
                 .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
-                .finishCheckout();
+                .finishCheckout()
+                .getCheckoutCompleteActions()
+                .clickBackHome()
+                .clickBurgerMenuAndLogout();
         log.info("Completed Checkout flow for user: {}", Users.STANDARD_USER.getUsername() );
 
     }

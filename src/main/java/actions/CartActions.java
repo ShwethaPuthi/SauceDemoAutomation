@@ -1,6 +1,8 @@
 package actions;
 
+import org.testng.Assert;
 import pages.SiteFactory;
+import utils.AppStrings;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
@@ -28,7 +30,9 @@ public class CartActions extends BaseActions{
     }
 
     public CartActions verifyCartBadgeCount(int expectedCount) {
-        siteFactory.getCartPage().verifyCartCount(expectedCount);
+        int actualCount = siteFactory.getCartPage().getCartCount();
+        log.info("Expected Cart Count: {}, Actual Cart Count: {}", expectedCount, actualCount);
+        Assert.assertEquals(actualCount, expectedCount, AppStrings.CartCountError);
         return this;
     }
 

@@ -1,8 +1,11 @@
 package actions;
 
+import org.testng.Assert;
 import pages.SiteFactory;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class InventoryActions extends BaseActions {
 
@@ -19,8 +22,11 @@ public class InventoryActions extends BaseActions {
     }
 
     public InventoryActions verifyAscendingOrder() {
-        siteFactory.getInventoryPage().verifyAscendingOrder();
-        log.info("Verified items are sorted in ascending order");
+        List<Double> prices = siteFactory.getInventoryPage().getItemPrices();
+        boolean sorted = siteFactory.getInventoryPage().isSortedAscending(prices);
+        log.info("Validating ascending order for prices: {}", prices);
+        Assert.assertTrue(sorted, "Prices are NOT sorted in ascending order!");
+        log.info(" Verified items are sorted in ascending order");
         return this;
     }
 }

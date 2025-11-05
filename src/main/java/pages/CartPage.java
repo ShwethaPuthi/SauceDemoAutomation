@@ -28,11 +28,11 @@ public class CartPage extends BasePage{
     @FindBy(className = "shopping_cart_link")
     private WebElement cartLink;
 
-    @FindBy(css = ".inventory_item_price")
+    /*@FindBy(css = ".inventory_item_price")
     private List<WebElement> itemPrices;
 
     @FindBy(css = ".summary_subtotal_label")
-    private WebElement subtotalLabel;
+    private WebElement subtotalLabel;*/
 
     @FindBy(css = ".checkout_button")
     private WebElement checkoutButton;
@@ -41,20 +41,20 @@ public class CartPage extends BasePage{
     public void addProductToCart(String productName) {
         String xpath = String.format(AppStrings.ADD_TO_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
+        log.info("Clicked 'Add to Cart' for: {}", productName);
     }
 
     public void removeProductFromCart(String productName) {
         String xpath = String.format(AppStrings.REMOVE_FROM_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
+        log.info("Clicked 'Remove' for: {}", productName);
     }
 
-    // Verify cart badge
-    public void verifyCartCount(int expectedCount) {
-        int actualCount = (cartBadge != null && cartBadge.isDisplayed())
-                ? Integer.parseInt(cartBadge.getText().trim())
-                : 0;
-        log.info("Expected Cart Count: {}, Actual Cart Count: {}", expectedCount, actualCount);
-        Assert.assertEquals(actualCount, expectedCount, AppStrings.CartCountError);
+    public int getCartCount() {
+        if (cartBadge != null && cartBadge.isDisplayed()) {
+            return Integer.parseInt(cartBadge.getText().trim());
+        }
+        return 0;
     }
 
     public Map<String, Double> getCartProductsWithPrices() {
@@ -72,10 +72,13 @@ public class CartPage extends BasePage{
     // Click cart badge icon
     public void clickCartIcon() {
         cartLink.click();
+        log.info("Clicked on cart icon");
     }
 
     // Click checkout button
     public void clickCheckoutButton() {
         checkoutButton.click();
+        log.info("Clicked on Checkout button");
     }
 }
+
