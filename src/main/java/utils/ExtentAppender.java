@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Plugin(name = "ExtentAppender", category = Core.CATEGORY_NAME, elementType = Appender.ELEMENT_TYPE)
 public class ExtentAppender extends AbstractAppender {
-
+// AbstractAppender is the parent class that defines the basic structure of how an appender should behave.
     protected ExtentAppender(String name, Filter filter, Layout<? extends Serializable> layout, boolean ignoreExceptions) {
         super(name, filter, layout, ignoreExceptions);
     }

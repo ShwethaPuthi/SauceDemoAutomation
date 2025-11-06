@@ -7,6 +7,7 @@ import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AppStrings;
+import utils.LogHelper;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 import utils.ReportManager;
@@ -37,7 +38,7 @@ public class CartTest extends BaseTest {
                 .getCheckoutCompleteActions()
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();
-        log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());
+        LogHelper.info(log,"Completed Cart to Checkout flow for user:  " +Users.STANDARD_USER.getUsername());
 
     }
 }

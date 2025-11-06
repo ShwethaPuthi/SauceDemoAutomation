@@ -6,6 +6,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import base.BaseTest;
 import utils.AppStrings;
+import utils.LogHelper;
 import utils.ReportManager;
 
 @Listeners(TestListeners.class)
@@ -27,7 +28,7 @@ public class CheckoutTest extends BaseTest {
                 .getCheckoutCompleteActions()
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();
-        log.info("Completed Checkout flow for user: {}", Users.STANDARD_USER.getUsername() );
+        LogHelper.info(log,"Completed Checkout flow for user: " + Users.STANDARD_USER.getUsername() );
 
     }
 }

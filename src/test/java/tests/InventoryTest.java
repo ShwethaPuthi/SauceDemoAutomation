@@ -5,6 +5,7 @@ import enums.Users;
 import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.LogHelper;
 import utils.ReportManager;
 
 @Listeners(TestListeners.class)
@@ -19,7 +20,7 @@ public class InventoryTest extends BaseTest {
                 .getInventoryActions()
                 .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
                 .verifyAscendingOrder();
-        log.info("Inventory sorting test completed successfully for user: {}", Users.STANDARD_USER.getUsername());
+        LogHelper.info(log,"Inventory sorting test completed successfully for user: " +Users.STANDARD_USER.getUsername());
 
     }
 }
