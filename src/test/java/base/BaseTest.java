@@ -10,7 +10,10 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pages.SiteFactory;
 import utils.AppStrings;
+import utils.LogHelper;
 import utils.LoggerUtils;
+import utils.ReportManager;
+
 import java.time.Duration;
 
 public class BaseTest {
@@ -33,13 +36,14 @@ public class BaseTest {
         driver.set(BrowserType.fromString(browser).createDriver());
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        log.info("Navigating to URL: {}", url);
+        LogHelper.info(log, "Navigating to URL: " +url);
+        //log.info("Navigating to URL: {}", url);
         getDriver().get(url);
 
         // Initialize using getDriver()
         siteFactory = new SiteFactory(getDriver());
         baseActions = new BaseActions(siteFactory);
-        log.info("Browser setup complete. Base Actions and SiteFactory initialized.");
+        LogHelper.info(log,"Browser setup complete. Base Actions and SiteFactory initialized.");
     }
 
     @AfterClass(alwaysRun = true)
@@ -47,7 +51,7 @@ public class BaseTest {
         if (getDriver() != null) {
             getDriver().quit();
             driver.remove(); //  Important to clean up thread reference
-            log.info("Browser closed successfully.");
+            LogHelper.info(log,"Browser closed successfully.");
         }
     }
 

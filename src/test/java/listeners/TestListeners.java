@@ -14,7 +14,7 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        ReportManager.initExtentAppender();
+        //ReportManager.initExtentAppender();
         ReportManager.startTest(result.getMethod().getMethodName(),
                 result.getMethod().getDescription());
         log.info("Starting test: {}", result.getName());

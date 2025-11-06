@@ -1,8 +1,8 @@
 package utils;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.ExtentReports;  //the central report manager object
+import com.aventstack.extentreports.ExtentTest;     //represents an individual test in the report
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;   //the HTML generator for Extent (creates the .html file).
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.openqa.selenium.OutputType;
@@ -19,7 +19,7 @@ public class ReportManager {
 
     private static ExtentReports extent;
     private static String reportPath;
-    private static final ConcurrentHashMap<Long, ExtentTest> testMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Long, ExtentTest> testMap = new ConcurrentHashMap<>();  //a thread-safe map that holds an ExtentTest per thread.
 
     private static final String REPORT_FOLDER = System.getProperty("user.dir") + "/reports/";
     private static final String SCREENSHOT_FOLDER = REPORT_FOLDER + "screenshots/";
@@ -39,7 +39,7 @@ public class ReportManager {
         reporter.config().setReportName("SauceDemo Test Execution Report");
         reporter.config().setTheme(Theme.STANDARD);
 
-        extent = new ExtentReports();
+        extent = new ExtentReports();  //creates the main manager
         extent.attachReporter(reporter);
         extent.setSystemInfo("Environment", "QA");
         extent.setSystemInfo("Tester", "Shwetha V Puthi");
@@ -57,6 +57,8 @@ public class ReportManager {
     public static synchronized ExtentTest startTest(String testName, String description) {
         ExtentTest test = getInstance().createTest(testName, description);
         testMap.put(Thread.currentThread().getId(), test);
+        // stores the test object in the map keyed by current thread id
+        // this is how the manager knows which ExtentTest belongs to which running thread.
         return test;
     }
 
@@ -91,7 +93,7 @@ public class ReportManager {
         String relativePath = takeScreenshot(driver, testName);
         getTest().addScreenCaptureFromPath(relativePath);
     }
-    // ---------------- Register ExtentAppender ----------------
+    /* ---------------- Register ExtentAppender ----------------
     public static synchronized void initExtentAppender() {
         if (extent == null) {
             getInstance(); // ensure extent is initialized
@@ -113,6 +115,27 @@ public class ReportManager {
             config.addAppender(appender);
             config.getRootLogger().addAppender(appender, null, null);
             context.updateLoggers();
+        }
+    }*/
+    //Logging Utilities
+    public static synchronized void logInfo(String message) {
+        ExtentTest test = getTest();
+        if (test != null) {
+            test.info(message);
+        }
+    }
+
+    public static synchronized void logPass(String message) {
+        ExtentTest test = getTest();
+        if (test != null) {
+            test.pass(message);
+        }
+    }
+
+    public static synchronized void logFail(String message) {
+        ExtentTest test = getTest();
+        if (test != null) {
+            test.fail(message);
         }
     }
 }

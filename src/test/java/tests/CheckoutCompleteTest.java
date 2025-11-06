@@ -26,6 +26,6 @@ public class CheckoutCompleteTest extends BaseTest {
                 .getCheckoutCompleteActions()
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();
-
+        log.info("Completed Complete flow for user: {}", Users.STANDARD_USER.getUsername());
     }
 }

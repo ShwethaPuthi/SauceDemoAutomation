@@ -33,10 +33,10 @@ public class CartTest extends BaseTest {
                 .getCheckoutActions()
                 .fillUserDetails(UserDetails.DETAILS.getFirstname(), UserDetails.DETAILS.getLastname(), UserDetails.DETAILS.getPinCode())
                 .verifySubtotalTaxTotal(getBaseActions().getCartActions().getCartProducts())
-                .finishCheckout();
-                //.getCheckoutCompleteActions()
-                //.clickBackHome()
-                //.clickBurgerMenuAndLogout();
+                .finishCheckout()
+                .getCheckoutCompleteActions()
+                .clickBackHome()
+                .clickBurgerMenuAndLogout();
         log.info("Completed Cart to Checkout flow for user: {}", Users.STANDARD_USER.getUsername());
 
     }

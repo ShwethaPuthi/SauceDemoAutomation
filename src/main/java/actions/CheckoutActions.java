@@ -3,6 +3,7 @@ package actions;
 import org.testng.Assert;
 import pages.SiteFactory;
 import utils.AppStrings;
+import utils.LogHelper;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class CheckoutActions extends BaseActions {
         siteFactory.getCheckoutPage().enterLastName(lastName);
         siteFactory.getCheckoutPage().enterPostalCode(postalCode);
         siteFactory.getCheckoutPage().clickContinueButton();
-        log.info("Filled checkout details: {} {} {}", firstName, lastName, postalCode);
+        LogHelper.info(log,"Filled checkout details: " +firstName+ lastName+  postalCode);
         return this;
     }
 
@@ -39,17 +40,19 @@ public class CheckoutActions extends BaseActions {
         // Step 2: Calculate expected subtotal based on cart items
         double expectedSubtotal = cartProducts.values().stream().mapToDouble(Double::doubleValue).sum();
         double expectedTotal = expectedSubtotal + displayedTax; // total = subtotal + tax
-        log.info("Expected Subtotal: {}, Displayed Subtotal: {}", expectedSubtotal, displayedSubtotal);
-        log.info("Expected Total: {}, Displayed Total: {}, Displayed Tax: {}", expectedTotal, displayedTotal, displayedTax);
+        LogHelper.info(log, "Expected Subtotal:"   +expectedSubtotal+  "Displayed Subtotal: " +displayedSubtotal);
+        //log.info("Expected Subtotal: {}, Displayed Subtotal: {}", expectedSubtotal, displayedSubtotal);
+        LogHelper.info(log,"Expected Total: " +expectedTotal+ "Displayed Total: " +displayedTotal+ " Displayed Tax: " +displayedTax);
+        //log.info("Expected Total: {}, Displayed Total: {}, Displayed Tax: {}", expectedTotal, displayedTotal, displayedTax);
         Assert.assertEquals(displayedSubtotal, expectedSubtotal, 0.01, AppStrings.CheckoutSubTotalMsg);
         Assert.assertEquals(displayedTotal, expectedTotal, 0.01, AppStrings.TotalMismatch);
-        log.info("Verified subtotal, tax, and total successfully!");
+        LogHelper.info(log,"Verified subtotal, tax, and total successfully!");
         return this;
     }
 
     public CheckoutActions finishCheckout() {
         siteFactory.getCheckoutPage().clickFinishButton();
-        log.info("Finished checkout");
+        LogHelper.info(log,"Finished checkout");
         return this;
 
     }
