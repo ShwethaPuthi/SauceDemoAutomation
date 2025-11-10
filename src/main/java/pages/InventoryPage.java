@@ -15,7 +15,7 @@ public class InventoryPage extends BasePage{
     @FindBy(css = ".inventory_item_price")
     private List<WebElement> prices;
 
-    @FindBy(css = ".product_sort_container")
+    @FindBy(css = ".product_sort_containers")
     private WebElement sortDropdown;
 
     public InventoryPage selectSort(String sortOption) {

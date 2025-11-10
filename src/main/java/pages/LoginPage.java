@@ -26,29 +26,26 @@ public class LoginPage extends BasePage{
     @FindBy(css = "h3[data-test='error']")
     private WebElement errorMessage;
 
-    public void enterUsername(String username) {
-        LogHelper.info(log,"Entering username: "+ username);
+    public LoginPage enterUsername(String username) {
+        log.info("Entering username: {}", username);
         usernameInput.clear();
         usernameInput.sendKeys(username);
+        return this;
     }
 
-    public void enterPassword(String password) {
-        LogHelper.info(log,"Entering password: " + password);
+    public LoginPage enterPassword(String password) {
+        log.info("Entering password: {}", password );
         passwordInput.clear();
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
-        LogHelper.info(log,"Clicking login button");
+    public LoginPage clickLoginButton() {
+        log.info("Clicking login button");
         loginButton.click();
+        return this;
     }
 
-    public void performLogin(String username, String password) {
-        enterUsername(username);
-        enterPassword(password);
-        clickLoginButton();
-        LogHelper.info(log,"Performed login with given credentials.");
-    }
     // Utility getters (used by Action class for validation)
     public String getErrorMessage() {
         return errorMessage.getText().trim();

@@ -36,14 +36,13 @@ public class BaseTest {
         driver.set(BrowserType.fromString(browser).createDriver());
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        LogHelper.info(log, "Navigating to URL: " +url);
-        //log.info("Navigating to URL: {}", url);
+        log.info("Navigating to URL: {}", url);
         getDriver().get(url);
 
         // Initialize using getDriver()
         siteFactory = new SiteFactory(getDriver());
         baseActions = new BaseActions(siteFactory);
-        LogHelper.info(log,"Browser setup complete. Base Actions and SiteFactory initialized.");
+        log.info("Browser setup complete. Base Actions and SiteFactory initialized.");
     }
 
     @AfterClass(alwaysRun = true)
@@ -51,7 +50,7 @@ public class BaseTest {
         if (getDriver() != null) {
             getDriver().quit();
             driver.remove(); //  Important to clean up thread reference
-            LogHelper.info(log,"Browser closed successfully.");
+            log.info("Browser closed successfully.");
         }
     }
 

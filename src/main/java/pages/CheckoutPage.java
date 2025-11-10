@@ -13,7 +13,7 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
-    private Logger log = LoggerUtils.getLogger(CheckoutPage.class);
+    //private Logger log = LoggerUtils.getLogger(CheckoutPage.class);
 
     @FindBy(id = "first-name")
     private WebElement firstNameInput;

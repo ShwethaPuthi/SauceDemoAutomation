@@ -38,8 +38,7 @@ public class CartTest extends BaseTest {
                 .getCheckoutCompleteActions()
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();
-        LogHelper.info(log,"Completed Cart to Checkout flow for user:  " +Users.STANDARD_USER.getUsername());
-
+        log.info("Completed Cart to Checkout flow for user: {}  " ,Users.STANDARD_USER.getUsername());
     }
 }
 
