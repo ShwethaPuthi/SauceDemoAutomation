@@ -4,8 +4,8 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import pages.SiteFactory;
 import utils.AppStrings;
-import utils.LogHelper;
 import utils.LoggerUtils;
+import utils.ReportManager;
 
 public class LoginActions extends BaseActions {
 
@@ -17,6 +17,7 @@ public class LoginActions extends BaseActions {
 
     public LoginActions loginToApp(String username, String password) {
         log.info("Performing login for user: {}", username);
+        ReportManager.logInfo("Performing login for user: " +username);
         siteFactory
                 .getLoginPage()
                 .enterUsername(username)
@@ -28,16 +29,20 @@ public class LoginActions extends BaseActions {
     public InventoryActions verifySuccessfulLogin() {
         String actualUrl = siteFactory.getLoginPage().getCurrentUrl();
         log.info("Verifying login success. Current URL: {}", actualUrl);
+        ReportManager.logInfo("Verifying login success. Current URL: "+actualUrl);
         Assert.assertEquals(actualUrl, AppStrings.INVENTORY_PAGE_URL, AppStrings.ErrorMsg);
         log.info( "Login verified successfully. Navigating to Inventory Page.");
+        ReportManager.logInfo("Login verified successfully. Navigating to Inventory Page.");
         return new InventoryActions(siteFactory);
     }
 
     public LoginActions verifyLoginFailure(String expectedMessage) {
         String actualMessage = siteFactory.getLoginPage().getErrorMessage();
         log.info("Verifying login failure. Expected: '{}', Actual: '{}'", expectedMessage, actualMessage);
+        ReportManager.logInfo("Verifying login failure. Expected: " +expectedMessage+ " Actual: " +actualMessage);
         Assert.assertEquals(actualMessage, expectedMessage, AppStrings.LoginMismatchMsg);
         log.info("Verified login failed with expected error message.");
+        ReportManager.logInfo("Verified login failed with expected error message.");
         return this;
     }
 }

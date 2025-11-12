@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AppStrings;
-import utils.LogHelper;
 import utils.LoggerUtils;
+import utils.ReportManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,8 @@ public class CartPage extends BasePage{
      public CartPage(WebDriver driver) {
         super(driver);
     }
-    private Logger log = LoggerUtils.getLogger(CartPage.class);
+     private Logger log = LoggerUtils.getLogger(CartPage.class);
+
 
     @FindBy(className = "cart_item")
     private List<WebElement> cartItems;
@@ -36,12 +38,15 @@ public class CartPage extends BasePage{
         String xpath = String.format(AppStrings.ADD_TO_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
         log.info("Clicked 'Add to Cart' for: {}" , productName);
+        ReportManager.logInfo("Clicked 'Add to Cart' for: "+productName);
+
     }
 
     public void removeProductFromCart(String productName) {
         String xpath = String.format(AppStrings.REMOVE_FROM_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
         log.info("Clicked 'Remove' for: {}", productName );
+        ReportManager.logInfo("Clicked 'Remove' for: "+productName);
     }
 
     public int getCartCount() {
@@ -67,12 +72,14 @@ public class CartPage extends BasePage{
     public void clickCartIcon() {
         cartLink.click();
         log.info("Clicked on cart icon");
+        ReportManager.logInfo("Clicked on cart icon");
     }
 
     // Click checkout button
     public void clickCheckoutButton() {
         checkoutButton.click();
         log.info("Clicked on Checkout button");
+        ReportManager.logInfo("Clicked on Checkout button");
     }
 }
 
