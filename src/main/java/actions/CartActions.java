@@ -20,33 +20,33 @@ public class CartActions extends BaseActions{
 
     public CartActions addItem(String productName) {
         siteFactory.getCartPage().addProductToCart(productName);
-        LogHelper.info(log,"Added item to cart: " + productName);
+        log.info("Added item to cart: {}", productName);
         return this;
     }
 
     public CartActions removeItem(String productName) {
         siteFactory.getCartPage().removeProductFromCart(productName);
-        LogHelper.info(log,"Removed item from cart: " + productName);
+        log.info("Removed item from cart: {} ", productName);
         return this;
     }
 
     public CartActions verifyCartBadgeCount(int expectedCount) {
         int actualCount = siteFactory.getCartPage().getCartCount();
-        LogHelper.info(log,"Expected Cart Count: "+ expectedCount + " Actual Cart Count: "+ actualCount);
+        log.info("Expected Cart Count {}, Actual Cart count {},", expectedCount, actualCount);
         Assert.assertEquals(actualCount, expectedCount, AppStrings.CartCountError);
         return this;
     }
 
     public CartActions clickCartBadge() {
         siteFactory.getCartPage().clickCartIcon();
-        LogHelper.info(log,"Clicked on cart badge icon");
+        log.info("Clicked on cart badge icon");
         return this;
     }
 
     public CartActions proceedToCheckout() {
         cartProducts = siteFactory.getCartPage().getCartProductsWithPrices();
         siteFactory.getCartPage().clickCheckoutButton();
-        LogHelper.info(log,"Proceeded to checkout with items: " +cartProducts);
+        log.info("Proceeded to checkout with items: {} " ,cartProducts);
         return this;
     }
 

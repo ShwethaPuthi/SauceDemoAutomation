@@ -16,27 +16,28 @@ public class LoginActions extends BaseActions {
     }//This calls the parent constructor in BaseActions. It initializes this.siteFactory (so you can access all pages like LoginPage, CartPage, etc.)
 
     public LoginActions loginToApp(String username, String password) {
-        LogHelper.info(log, "Performing login for user: " +username);
-        //log.info("Performing login for user: {}", username);
-        siteFactory.getLoginPage().performLogin(username, password);
+        log.info("Performing login for user: {}", username);
+        siteFactory
+                .getLoginPage()
+                .enterUsername(username)
+                .enterPassword(password)
+                .clickLoginButton();
         return this;
     }
 
     public InventoryActions verifySuccessfulLogin() {
         String actualUrl = siteFactory.getLoginPage().getCurrentUrl();
-        LogHelper.info(log, "Verifying login success. Current URL: "  +actualUrl);
-        //log.info("Verifying login success. Current URL: {}", actualUrl);
+        log.info("Verifying login success. Current URL: {}", actualUrl);
         Assert.assertEquals(actualUrl, AppStrings.INVENTORY_PAGE_URL, AppStrings.ErrorMsg);
-        LogHelper.info(log, "Login verified successfully. Navigating to Inventory Page.");
+        log.info( "Login verified successfully. Navigating to Inventory Page.");
         return new InventoryActions(siteFactory);
     }
 
     public LoginActions verifyLoginFailure(String expectedMessage) {
         String actualMessage = siteFactory.getLoginPage().getErrorMessage();
-        LogHelper.info(log,"Verifying login failure. Expected: "+expectedMessage+ "Actual: " +actualMessage);
-        //log.info("Verifying login failure. Expected: '{}', Actual: '{}'", expectedMessage, actualMessage);
+        log.info("Verifying login failure. Expected: '{}', Actual: '{}'", expectedMessage, actualMessage);
         Assert.assertEquals(actualMessage, expectedMessage, AppStrings.LoginMismatchMsg);
-        LogHelper.info(log,"Verified login failed with expected error message.");
+        log.info("Verified login failed with expected error message.");
         return this;
     }
 }

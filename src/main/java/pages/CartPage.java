@@ -35,13 +35,13 @@ public class CartPage extends BasePage{
     public void addProductToCart(String productName) {
         String xpath = String.format(AppStrings.ADD_TO_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
-        LogHelper.info(log,"Clicked 'Add to Cart' for:" + productName);
+        log.info("Clicked 'Add to Cart' for: {}" , productName);
     }
 
     public void removeProductFromCart(String productName) {
         String xpath = String.format(AppStrings.REMOVE_FROM_CART_BUTTON_XPATH, productName);
         driver.findElement(By.xpath(xpath)).click();
-        LogHelper.info(log,"Clicked 'Remove' for:" + productName);
+        log.info("Clicked 'Remove' for: {}", productName );
     }
 
     public int getCartCount() {
@@ -66,13 +66,13 @@ public class CartPage extends BasePage{
     // Click cart badge icon
     public void clickCartIcon() {
         cartLink.click();
-        LogHelper.info(log,"Clicked on cart icon");
+        log.info("Clicked on cart icon");
     }
 
     // Click checkout button
     public void clickCheckoutButton() {
         checkoutButton.click();
-        LogHelper.info(log,"Clicked on Checkout button");
+        log.info("Clicked on Checkout button");
     }
 }
 

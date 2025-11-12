@@ -27,7 +27,7 @@ public class CheckoutActions extends BaseActions {
         siteFactory.getCheckoutPage().enterLastName(lastName);
         siteFactory.getCheckoutPage().enterPostalCode(postalCode);
         siteFactory.getCheckoutPage().clickContinueButton();
-        LogHelper.info(log,"Filled checkout details: " +firstName+ lastName+  postalCode);
+        log.info("Filled checkout details: {} {} {}", firstName, lastName, postalCode);
         return this;
     }
 
@@ -40,19 +40,17 @@ public class CheckoutActions extends BaseActions {
         // Step 2: Calculate expected subtotal based on cart items
         double expectedSubtotal = cartProducts.values().stream().mapToDouble(Double::doubleValue).sum();
         double expectedTotal = expectedSubtotal + displayedTax; // total = subtotal + tax
-        LogHelper.info(log, "Expected Subtotal:"   +expectedSubtotal+  "Displayed Subtotal: " +displayedSubtotal);
-        //log.info("Expected Subtotal: {}, Displayed Subtotal: {}", expectedSubtotal, displayedSubtotal);
-        LogHelper.info(log,"Expected Total: " +expectedTotal+ "Displayed Total: " +displayedTotal+ " Displayed Tax: " +displayedTax);
-        //log.info("Expected Total: {}, Displayed Total: {}, Displayed Tax: {}", expectedTotal, displayedTotal, displayedTax);
+        log.info("Expected Subtotal: {}, Displayed Subtotal: {}", expectedSubtotal, displayedSubtotal);
+        log.info("Expected Total: {}, Displayed Total: {}, Displayed Tax: {}", expectedTotal, displayedTotal, displayedTax);
         Assert.assertEquals(displayedSubtotal, expectedSubtotal, 0.01, AppStrings.CheckoutSubTotalMsg);
         Assert.assertEquals(displayedTotal, expectedTotal, 0.01, AppStrings.TotalMismatch);
-        LogHelper.info(log,"Verified subtotal, tax, and total successfully!");
+        log.info("Verified subtotal, tax, and total successfully!");
         return this;
     }
 
     public CheckoutActions finishCheckout() {
         siteFactory.getCheckoutPage().clickFinishButton();
-        LogHelper.info(log,"Finished checkout");
+        log.info("Finished checkout");
         return this;
 
     }
