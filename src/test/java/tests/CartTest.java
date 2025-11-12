@@ -7,7 +7,6 @@ import listeners.TestListeners;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AppStrings;
-import utils.LogHelper;
 import utils.LoggerUtils;
 import org.apache.logging.log4j.Logger;
 import utils.ReportManager;
@@ -19,7 +18,7 @@ public class CartTest extends BaseTest {
 
     @Test(groups = {"Functional"}, description = "Verify adding and removing items from the cart, and checkout initiation")
     public void CartFlowTest() {
-        ReportManager.getTest().assignCategory("Functional");
+        //ReportManager.getTest().assignCategory("Functional");
         getBaseActions()
                 .getLoginActions()
                 .loginToApp(Users.STANDARD_USER.getUsername(), Users.STANDARD_USER.getPassword())
@@ -39,6 +38,7 @@ public class CartTest extends BaseTest {
                 .clickBackHome()
                 .clickBurgerMenuAndLogout();
         log.info("Completed Cart to Checkout flow for user: {}  " ,Users.STANDARD_USER.getUsername());
+        ReportManager.logInfo("Completed Cart to Checkout flow for user: "+Users.STANDARD_USER.getUsername());
     }
 }
 

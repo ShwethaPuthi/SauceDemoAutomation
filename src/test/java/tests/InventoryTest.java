@@ -6,7 +6,6 @@ import listeners.TestListeners;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import utils.LogHelper;
 import utils.LoggerUtils;
 import utils.ReportManager;
 
@@ -15,7 +14,7 @@ public class InventoryTest extends BaseTest {
     private static final Logger log = LoggerUtils.getLogger(InventoryTest.class);
     @Test(groups = {"Smoke"}, description = "Verify inventory sorting by price (low to high)")
     public void inventoryFlowTest() {
-        ReportManager.getTest().assignCategory("Smoke");
+        //ReportManager.getTest().assignCategory("Smoke");
 
         getBaseActions()
                 .getLoginActions()
@@ -24,6 +23,7 @@ public class InventoryTest extends BaseTest {
                 .selectSort(SortOptions.PRICE_LOW_TO_HIGH.getOption())
                 .verifyAscendingOrder();
         log.info("Inventory sorting test completed successfully for user: {}" ,Users.STANDARD_USER.getUsername());
+        ReportManager.logInfo("Inventory sorting test completed successfully for user: "+Users.STANDARD_USER.getUsername());
 
     }
 }

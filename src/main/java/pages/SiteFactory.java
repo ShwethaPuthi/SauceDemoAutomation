@@ -1,19 +1,21 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import utils.ReportManager;
 
 public class SiteFactory {
     private WebDriver driver;
-
+    private ReportManager reportManager;
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
     private CheckoutCompletePage checkoutCompletePage;
 
-    public SiteFactory(WebDriver driver) {
-        this.driver = driver;
 
+    public SiteFactory(WebDriver driver, ReportManager reportManager) {
+        this.driver = driver;
+        this.reportManager = reportManager;
         //PageFactory.initElements(driver, this);
         //Why not? Selenium tries to initialize every field annotated with @FindBy inside your SiteFactory object.
         //But SiteFactory has page objects (like LoginPage, CartPage) that themselves call PageFactory.initElements(driver, this)

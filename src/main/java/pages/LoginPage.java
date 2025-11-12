@@ -4,8 +4,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.LogHelper;
 import utils.LoggerUtils;
+import utils.ReportManager;
 
 public class LoginPage extends BasePage{
 
@@ -28,6 +28,7 @@ public class LoginPage extends BasePage{
 
     public LoginPage enterUsername(String username) {
         log.info("Entering username: {}", username);
+        ReportManager.logInfo("Entering Username: "+username);
         usernameInput.clear();
         usernameInput.sendKeys(username);
         return this;
@@ -35,6 +36,7 @@ public class LoginPage extends BasePage{
 
     public LoginPage enterPassword(String password) {
         log.info("Entering password: {}", password );
+        ReportManager.logInfo("Entering password: "+password);
         passwordInput.clear();
         passwordInput.sendKeys(password);
         return this;
@@ -42,6 +44,7 @@ public class LoginPage extends BasePage{
 
     public LoginPage clickLoginButton() {
         log.info("Clicking login button");
+        ReportManager.logInfo("Clicking login button");
         loginButton.click();
         return this;
     }

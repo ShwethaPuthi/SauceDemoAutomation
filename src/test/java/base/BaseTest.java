@@ -10,7 +10,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pages.SiteFactory;
 import utils.AppStrings;
-import utils.LogHelper;
 import utils.LoggerUtils;
 import utils.ReportManager;
 
@@ -18,45 +17,49 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    //ThreadLocal gives each test thread its own private copy of the WebDriver.
-    //So, even if 5 tests run at once, each gets a separate, isolated browser.
-    // Thread-safe WebDriver for parallel execution
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
+    protected WebDriver driver;
     protected Logger log = LoggerUtils.getLogger(BaseTest.class);
     protected SiteFactory siteFactory;
     protected BaseActions baseActions;
+    protected ReportManager reportManager;
 
     @Parameters({"browser", "url"})
     @BeforeClass(alwaysRun = true)
     public void setup(@Optional("chrome") String browser,
                       @Optional(AppStrings.BASE_URL) String url) {
 
-        //  Create and set driver for this thread
-        driver.set(BrowserType.fromString(browser).createDriver());
-        getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver=BrowserType.fromString(browser).createDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        reportManager=new ReportManager();
         log.info("Navigating to URL: {}", url);
-        getDriver().get(url);
+        //ReportManager.logInfo("Navigating to URL: "+url);
+        driver.get(url);
 
         // Initialize using getDriver()
-        siteFactory = new SiteFactory(getDriver());
+        siteFactory = new SiteFactory(driver, reportManager);
         baseActions = new BaseActions(siteFactory);
+
         log.info("Browser setup complete. Base Actions and SiteFactory initialized.");
+        //ReportManager.logInfo("Browser setup complete. Base Actions and SiteFactory initialized.");
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        if (getDriver() != null) {
-            getDriver().quit();
-            driver.remove(); //  Important to clean up thread reference
+        if (driver!= null) {
+            driver.quit();
             log.info("Browser closed successfully.");
+            ReportManager.logInfo("Browser closed successfully.");
+        }
+        if (reportManager != null) {
+            reportManager.flush();
         }
     }
-
-    // Thread-safe getter
     public WebDriver getDriver() {
-        return driver.get();
+        return driver;
+    }
+    public ReportManager getReportManager() {
+        return reportManager;
     }
 
     public BaseActions getBaseActions() {

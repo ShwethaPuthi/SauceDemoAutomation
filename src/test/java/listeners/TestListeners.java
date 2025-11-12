@@ -1,6 +1,8 @@
 package listeners;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentReporter;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -11,14 +13,13 @@ import org.apache.logging.log4j.Logger;
 
 public class TestListeners implements ITestListener {
     private static final Logger log = LoggerUtils.getLogger(TestListeners.class);
-
+    ExtentReports extentReport;
     @Override
     public void onTestStart(ITestResult result) {
-        //ReportManager.initExtentAppender();
         ReportManager.startTest(result.getMethod().getMethodName(),
                 result.getMethod().getDescription());
+        ReportManager.logInfo("Starting test: "+result.getName());
         log.info("Starting test: {}", result.getName());
-       // ReportManager.endTest();
     }
 
     @Override
@@ -55,7 +56,6 @@ public class TestListeners implements ITestListener {
     public void onFinish(ITestContext context) {
         ReportManager.getInstance().flush();
         String reportPath = ReportManager.getReportPath();
-        log.info("Extent Report generated at: " + reportPath);
         log.info("Extent Report generated at: {}", reportPath);
     }
 }
